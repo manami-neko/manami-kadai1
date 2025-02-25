@@ -31,6 +31,7 @@
     </label>
 
     <input type="submit" value="検索">
+    <input type="submit" value="リセット">
 
     <div>
         {{ $contacts->links('pagination::bootstrap-4') }}
