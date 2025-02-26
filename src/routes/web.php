@@ -15,13 +15,17 @@ use App\Http\Controllers\ContactController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/', [ContactController::class, 'index']);
 Route::post('/confirm', [ContactController::class, 'confirm']);
 Route::post('/thanks', [ContactController::class, 'thanks']);
-Route::get('/admin', [ContactController::class, 'admin']);
+// Route::middleware('auth')->group(function () {
+Route::post('/admin', [ContactController::class, 'admin']);
+// });
 Route::get('/register', [ContactController::class, 'register']);
+Route::post('/register', [ContactController::class, 'create']);
 Route::get('/login', [ContactController::class, 'login']);
+Route::post('/login', [ContactController::class, 'login']);

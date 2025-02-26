@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\Category;
+use App\Models\User;
+use App\Http\Requests\ContactRequest;
 
 
 class ContactController extends Controller
@@ -18,7 +20,6 @@ class ContactController extends Controller
     public function confirm(Request $request)
     {
         $contact = $request->only(
-            [
                 'last_name',
                 'first_name',
                 'gender',
@@ -29,9 +30,9 @@ class ContactController extends Controller
                 'address',
                 'building',
                 'category_id',
-                'detail'
-            ]);
-
+                'detail',
+            );
+        // dd($request->all());
         if ($contact['gender'] == 1) {
         $contact['gender_text'] = '男性';
     } elseif ($contact['gender'] == 2) {
@@ -39,9 +40,8 @@ class ContactController extends Controller
     } elseif ($contact['gender'] == 3) {
         $contact['gender_text'] = 'その他';
     }
-
+    // ddd($contact);
         $category = Category::find($request->category_id);
-        // ddd($data);
         return view('confirm', compact('contact','category'));
     }
 
@@ -58,27 +58,37 @@ class ContactController extends Controller
                 'address',
                 'building',
                 'category_id',
-                'detail'
+                'detail',
             ]);
-        // ddd($data);
         Contact::create($contact);
         // ddd($data);
         return view('thanks');
     }
 
-    public function register()
+    public function register(Request $request)
     {
         return view('register');
     }
 
-    public function login()
+    public function create(Request $request)
+    {
+        User::create([
+                'name' =>$request->name,
+                'email' => $request->email,
+                'password' =>$request->password,
+            ]);
+
+        return redirect('login');
+        // ddd($data);
+    }
+
+    public function login(Request $request)
     {
         return view('login');
     }
 
     public function admin(Request $request)
     {
-        $contacts = Contact::all();
         $categories = Category::all();
 
         $contacts = Contact::Paginate(7);
