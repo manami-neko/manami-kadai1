@@ -18,10 +18,16 @@ use App\Http\Controllers\ContactController;
 Route::get('/', [ContactController::class, 'index']);
 Route::post('/confirm', [ContactController::class, 'confirm']);
 Route::post('/thanks', [ContactController::class, 'thanks']);
+
 // Route::middleware('auth')->group(function () {
 Route::post('/admin', [ContactController::class, 'admin']);
 // });
+Route::middleware('auth')->get('/admin', [ContactController::class, 'admin']);
+
 Route::get('/register', [ContactController::class, 'register']);
 Route::post('/register', [ContactController::class, 'create']);
+
 Route::get('/login', [ContactController::class, 'login']);
 Route::post('/login', [ContactController::class, 'login']);
+
+Route::post('/contacts/search', [ContactController::class, 'search']);

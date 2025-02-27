@@ -9,7 +9,7 @@
 
 <body>
 
-    <div class="contact-form__content">
+    <div class="thanks-form__content">
         <div class="contact-form__heading">
             <h2>お問い合わせありがとうございました</h2>
         </div>

@@ -7,6 +7,7 @@
 @section('content')
 
 <form class="form" action="/admin" method="get">
+    @csrf
     <div class="admin-form__content">
         <div class="admin-form__heading">
             <h2>Admin</h2>
@@ -29,8 +30,8 @@
             <input type="date" name="calender" value=""/>
         </label>
 
-        <input type="submit" value="検索">
-        <input type="reset" value="リセット">
+        <input type="submit" name="search-button" value="検索">
+        <input type="reset" name="reset-button" value="リセット">
 
         <div>
             {{ $contacts->links('pagination::bootstrap-4') }}
@@ -54,7 +55,7 @@
                 <td>{{$contact->email}}</td>
                 <td>{{$contact->category->content}}</td>
                 <td>
-                    <button type="button" class="primary" wire:click="$emit('openModal', {{ $contact->id }})">詳細</button>
+                    <button type="button" class="primary" wire:click="openModal({{ $contact->id }})">詳細</button>
                 </td>
             </tr>
             @endforeach

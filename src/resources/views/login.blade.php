@@ -20,7 +20,7 @@
         @csrf
         <div class="login__group">
             <div class="login__group-title">
-                <span class="login__label--item">メールアドレス</span>
+                <span class="login__item">メールアドレス</span>
                 <input type="email" name="email" placeholder="例:test@example.com"/>
                 <div class="form__error">
                 @error('email')
@@ -30,7 +30,7 @@
         </div>
         <div class="login__group">
             <div class="login__group-title">
-                <span class="login__label--item">パスワード</span>
+                <span class="login__item">パスワード</span>
                 <input type="password" name="password" placeholder="例:coachtech1106"/>
                 <div class="form__error">
                 @error('password')

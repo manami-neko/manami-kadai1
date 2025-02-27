@@ -10,7 +10,10 @@ class AdminModal extends Component
     public $contact;
     public $showModal = false;
 
-    protected $listeners = ['openModal' => "openModal"];
+    protected $listeners = [
+        'openModal' => "openModal",
+        'closeModal' => "closeModal"
+    ];
 
     public function openModal($id)
     {
@@ -30,8 +33,9 @@ class AdminModal extends Component
 
     public function deleteContact()
     {
-    Contact::$this->contact->delete();
-    // session()->flash('message', '削除しました');
+    $this->contact->delete();
+    $this->emit('contactDeleted');
+    $this->contact = null;
     $this->closeModal();
     }
 }

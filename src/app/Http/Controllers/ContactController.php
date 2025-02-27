@@ -96,4 +96,13 @@ class ContactController extends Controller
         $contacts = Contact::Paginate(7);
         return view('admin', compact('contacts', 'categories'));
     }
+
+
+    public function search(Request $request)
+    {
+        $contacts = Contact::with('category')->ContactSearch($request->category_id)->KeywordSearch($request->keyword)->paginate(7);
+
+        $categories = Category::all();
+        return view('admin', compact('contacts', 'categories'));
+    }
 }
