@@ -44,6 +44,16 @@
             <div class="register__group-title">
                 <span class="register__label--item">パスワード</span>
                 <input type="password" name="password" placeholder="例:coachtech1106"/>
+            <div class="form__group">
+                <div class="form__group-title">
+                    <span class="form__label--item">確認用パスワード</span>
+                </div>
+                <div class="form__group-content">
+                    <div class="form__input--text">
+                    <input type="password" name="password_confirmation" />
+                    </div>
+                </div>
+            </div>
                 <div class="form__error">
                 @error('password')
                 <div class="error">{{ $message }}</div>
