@@ -20,4 +20,8 @@ Route::post('/confirm', [ContactController::class, 'confirm']);
 Route::post('/thanks', [ContactController::class, 'thanks']);
 
 
+Route::middleware('auth')->get('/admin', [ContactController::class, 'admin']);
+
+
+
 Route::post('/contacts/search', [ContactController::class, 'search']);
