@@ -74,7 +74,7 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="tel1" name="tel" value="{{ old('tel1') }}" placeholder="080" />-
+                    <input type="text" name="tel1" value="{{ old('tel1') }}" placeholder="080" />-
                     <input type="text" name="tel2" value="{{ old('tel2') }}" placeholder="1234" />-
                     <input type="text" name="tel3" value="{{ old('tel3') }}" placeholder="5678" />
                 </div>

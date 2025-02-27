@@ -24,19 +24,17 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
+            // 'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required',
             'last_name' => 'required',
             'first_name' => 'required',
             'gender' => 'required',
-            // 'tel' => 'required',
             'tel1' => 'required|max:5',
             'tel2' => 'required|max:5',
             'tel3' => 'required|max:5',
             'address' => 'required',
             'category_id' => 'required',
-            'detail' => 'required',
+            'detail' => 'required|max:150',
 
         ];
     }
@@ -44,10 +42,9 @@ class ContactRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'お名前を入力してください',
+            // 'name.required' => 'お名前を入力してください',
             'email.required' => 'メールアドレスを入力してください',
             'email.email' =>'メールアドレスは「ユーザー名@ドメイン」形式で入力してください',
-            'password.required' => 'パスワードを入力してください',
             'last_name.required' => '姓を入力してください',
             'first_name.required' => '名を入力してください',
             'gender.required' => '性別を選択してください',
@@ -60,6 +57,7 @@ class ContactRequest extends FormRequest
             'address.required' => '住所を入力してください',
             'category_id.required' => 'お問い合わせの種類を選択してください',
             'detail.required' => 'お問い合わせ内容を入力してください',
+            'detail.max' => 'お問合せ内容は120文字以内で入力してください',
         ];
     }
 }

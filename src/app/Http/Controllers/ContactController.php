@@ -7,6 +7,8 @@ use App\Models\Contact;
 use App\Models\Category;
 use App\Models\User;
 use App\Http\Requests\ContactRequest;
+use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\LoginRequest;
 
 
 class ContactController extends Controller
@@ -17,7 +19,7 @@ class ContactController extends Controller
         return view('index', compact('categories'));
     }
 
-    public function confirm(Request $request)
+    public function confirm(ContactRequest $request)
     {
         $contact = $request->only(
                 'last_name',
@@ -32,7 +34,7 @@ class ContactController extends Controller
                 'category_id',
                 'detail',
             );
-        // dd($request->all());
+
         if ($contact['gender'] == 1) {
         $contact['gender_text'] = '男性';
     } elseif ($contact['gender'] == 2) {
@@ -70,7 +72,7 @@ class ContactController extends Controller
         return view('register');
     }
 
-    public function create(Request $request)
+    public function create(RegisterRequest $request)
     {
         User::create([
                 'name' =>$request->name,
@@ -87,28 +89,11 @@ class ContactController extends Controller
         return view('login');
     }
 
-    public function admin(Request $request)
+    public function admin(LoginRequest $request)
     {
         $categories = Category::all();
 
         $contacts = Contact::Paginate(7);
         return view('admin', compact('contacts', 'categories'));
     }
-
-
-
-//         public function store(Request $request)
-// {
-//     $request->validate([
-//         'gender' => 'required|in:1,2,3',
-//     ]);
-
-//         // 新しいユーザーを作成
-//     User::create([
-//         'gender' => $request->gender,
-//     ]);
-
-//         return redirect()->route('users.index');
-// }
-
 }
