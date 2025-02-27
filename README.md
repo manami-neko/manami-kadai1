@@ -1,7 +1,9 @@
 ## アプリケーション名
+
 お問い合わせフォーム
 
 ## 環境構築
+
 ```
 Dockerビルド
 
@@ -20,6 +22,10 @@ Laravel環境構築
     4.php artisan key:generate
     5.php artisan migrate
     6.php artisan db:seed
+    "The stream or file could not be opened"エラーが発生した場合
+    srcディレクトリにあるstorageディレクトリ以下の権限を変更
+    $ chmod -R 777 storage
+
 ```
 
 ## 使用技術
@@ -29,12 +35,14 @@ Laravel環境構築
     ・Laravel 8.83.8
     ・MySQL 8.0.26
 ```
+
 ## URL
+
 ```
     ・環境開発：http://localhost/
     ・phpMyAdmin：http://localhost:8080/
 ```
 
+## ER 図
 
-## ER図
 ![ER図](ER.drawio.png)
