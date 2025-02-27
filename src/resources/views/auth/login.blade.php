@@ -6,7 +6,7 @@
 
 @section('content')
 
-<form class="form" action="/register" method="get" >
+<form class="form" action="/login" method="get" >
     @csrf
     <button class="register__button-submit" type="submit">register</button>
 </form>

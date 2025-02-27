@@ -89,7 +89,7 @@ class ContactController extends Controller
         return view('login');
     }
 
-    public function admin(LoginRequest $request)
+    public function admin(Request $request)
     {
         $categories = Category::all();
 
