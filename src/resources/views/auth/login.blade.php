@@ -6,7 +6,7 @@
 
 @section('content')
 
-<form class="form" action="/login" method="get" >
+<form class="form" action="/register" method="get" >
     @csrf
     <button class="register__button-submit" type="submit">register</button>
 </form>
@@ -16,7 +16,7 @@
         <h2>Login</h2>
     </div>
 
-    <form class="form" action="/admin" method="post">
+    <form class="form" action="/login" method="post">
         @csrf
         <div class="login__group">
             <div class="login__group-title">
