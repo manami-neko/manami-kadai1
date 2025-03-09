@@ -24,4 +24,4 @@ Route::middleware('auth')->get('/admin', [ContactController::class, 'admin']);
 
 
 
-Route::post('/contacts/search', [ContactController::class, 'search']);
+Route::get('/contacts/search', [ContactController::class, 'search']);

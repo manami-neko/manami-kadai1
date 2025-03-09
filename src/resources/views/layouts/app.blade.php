@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="{{ asset('css/common.css')}}" />
     @livewireStyles
     @yield('css')
+    @auth
+    <form class="form" action="/logout" method="post">
+    @csrf
+    <button class="header-nav__button">ログアウト</button>
+    </form>
+    @endauth
+
 </head>
 
 <body>

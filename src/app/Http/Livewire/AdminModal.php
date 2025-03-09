@@ -26,16 +26,17 @@ class AdminModal extends Component
         $this->showModal = false;
     }
 
-    public function render()
-    {
-        return view('livewire.admin-modal');
-    }
-
     public function deleteContact()
     {
     $this->contact->delete();
     $this->emit('contactDeleted');
     $this->contact = null;
     $this->closeModal();
+    }
+
+
+    public function render()
+    {
+        return view('livewire.admin-modal');
     }
 }

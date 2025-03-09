@@ -6,15 +6,15 @@
 
 @section('content')
 
-<form class="form" action="/admin" method="get">
+<form class="form" action="/contacts/search" method="get">
     @csrf
     <div class="admin-form__content">
         <div class="admin-form__heading">
             <h2>Admin</h2>
         </div>
 
-        <input type="text" name="keyword" placeholder="名前やメールアドレスを入力してください" />
-        <select class="select__gender"  name="gender">
+        <input type="text" name="keyword" value="{{request('keyword')}}" placeholder="名前やメールアドレスを入力してください" />
+        <select class="select__gender"  name="gender" value="{{request('gender')}}">
             <option value="">性別を選択</option>
             <option value="1">男性</option>
             <option value="2">女性</option>
@@ -27,11 +27,11 @@
             @endforeach
         </select>
         <label class="calender">
-            <input type="date" name="calender" value=""/>
+            <input type="date" name="date" value="{{request('date')}}"/>
         </label>
 
         <input type="submit" name="search-button" value="検索">
-        <input type="reset" name="reset-button" value="リセット">
+        <input type="submit" name="reset-button" value="リセット">
 
         <div>
             {{ $contacts->links('pagination::bootstrap-4') }}
@@ -55,12 +55,11 @@
                 <td>{{$contact->email}}</td>
                 <td>{{$contact->category->content}}</td>
                 <td>
-                    <button type="button" class="primary" wire:click="openModal({{ $contact->id }})">詳細</button>
+                    @livewire('admin-modal',['contact' => $contact])
                 </td>
             </tr>
             @endforeach
         </table>
     </div>
 </form>
-@livewire('admin-modal')
 @endsection

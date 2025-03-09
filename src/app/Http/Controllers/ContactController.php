@@ -100,9 +100,54 @@ class ContactController extends Controller
 
     public function search(Request $request)
     {
-        $contacts = Contact::with('category')->ContactSearch($request->category_id)->KeywordSearch($request->keyword)->paginate(7);
+    //     $contacts = Contact::with('category')->ContactSearch($request->category_id)->ContactSearch($request->keyword)
+    //     ->paginate(7);
 
+    //     $categories = Category::all();
+    //     return view('admin', compact('contacts', 'categories'));
+    // }
+
+    if ($request->has('reset')) {
+            return redirect('/admin')->withInput();
+        }
+        $query = Contact::query();
+
+        $query = $this->getSearchQuery($request, $query);
+
+        $contacts = $query->paginate(7);
+        $csvData = $query->get();
         $categories = Category::all();
-        return view('admin', compact('contacts', 'categories'));
+        return view('admin', compact('contacts', 'categories', 'csvData'));
+    }
+
+    public function destroy(Request $request)
+    {
+        Contact::find($request->id)->delete();
+        return redirect('/admin');
+    }
+
+    private function getSearchQuery($request, $query)
+    {
+        if(!empty($request->keyword)) {
+            $query->where(function ($q) use ($request) {
+                $q->where('first_name', 'like', '%' . $request->keyword . '%')
+                    ->orWhere('last_name', 'like', '%' . $request->keyword . '%')
+                    ->orWhere('email', 'like', '%' . $request->keyword . '%');
+            });
+        }
+
+        if (!empty($request->gender)) {
+            $query->where('gender', '=', $request->gender);
+        }
+
+        if (!empty($request->category_id)) {
+            $query->where('category_id', '=', $request->category_id);
+        }
+
+        if (!empty($request->date)) {
+            $query->whereDate('created_at', '=', $request->date);
+        }
+
+        return $query;
     }
 }

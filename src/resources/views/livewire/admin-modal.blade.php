@@ -1,19 +1,12 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/sanitize.css')}}" />
-    <link rel="stylesheet" href="{{ asset('css/admin-modal.css') }}"/>
-</head>
-<body>
-@if($showModal)
-<div class="modal fade show" >
-    <div class="modal-body">
-        <div class="modal-header">
-            <button type="button" class="modal-close" wire:click="closeModal">&times;</button>
+<div>
+    <button type="button" class="primary" wire:click="openModal({{ $contact->id }})">詳細</button>
 
-            <!-- @if($contact) -->
+    @if($showModal)
+    <div class="modal fade show" >
+        <div class="modal-body">
+            <div class="modal-header">
+                <button type="button" class="modal-close" wire:click="closeModal">&times;</button>
+            </div>
             <table>
                 <tr>
                     <th>お名前</th>
@@ -48,13 +41,10 @@
                     <td>{{$contact->detail}}</td>
                 </tr>
             </table>
-            <!-- @endif -->
-        </div>
         <div class="delete__button">
             <button class="delete__button-submit" type="submit" wire:click="deleteContact">削除</button>
         </div>
     </div>
+    @endif
 </div>
-@endif
-</body>
-</html>
+
