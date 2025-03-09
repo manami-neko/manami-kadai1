@@ -5,10 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\Category;
-use App\Models\User;
 use App\Http\Requests\ContactRequest;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\LoginRequest;
 
 
 class ContactController extends Controller
@@ -42,7 +39,6 @@ class ContactController extends Controller
     } elseif ($contact['gender'] == 3) {
         $contact['gender_text'] = 'その他';
     }
-    // ddd($contact);
         $category = Category::find($request->category_id);
         return view('confirm', compact('contact','category'));
     }
@@ -63,7 +59,6 @@ class ContactController extends Controller
                 'detail',
             ]);
         Contact::create($contact);
-        // ddd($data);
         return view('thanks');
     }
 
