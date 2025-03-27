@@ -34,6 +34,15 @@
                     </td>
                 </tr>
                 <tr class="confirm-table__row">
+                    <th class="confirm-table__header">どこで知りましたか？</th>
+                    <td class="confirm-table__text">
+                        @foreach ($channels as $channel)
+                        <input type="text" name="channel_contents[]" value="{{ $channel->content }}" readonly/>
+                        <input type="hidden" name="channel_ids[]" value="{{ $channel->id }}" />
+                        @endforeach
+                    </td>
+                </tr>
+                <tr class="confirm-table__row">
                     <th class="confirm-table__header">メールアドレス</th>
                     <td class="confirm-table__text">
                         <input type="email" name="email" value="{{ $contact['email'] }}" readonly/>
@@ -70,6 +79,8 @@
                         <input type="text" name="detail" value="{{ $contact['detail'] }}" readonly />
                     </td>
                 </tr>
+                <img src="{{ '/storage/' . $contact['image_file'] }}">
+                <input type="hidden" name="image_file" value="{{ $contact['image_file'] }}">
             </table>
         </div>
         <div class="form__button">

@@ -49,6 +49,7 @@ class ContactRequest extends FormRequest
             'first_name.required' => '名を入力してください',
             'gender.required' => '性別を選択してください',
             'tel1.required'=> '電話番号を入力してください',
+            'tel1.required'=> '電話番号は 半角英数字で入力してください',
             'tel1.max' => '電話番号は5桁までの数字で入力してください',
             'tel2.required'=> '電話番号を入力してください',
             'tel2.max' => '電話番号は5桁までの数字で入力してください',

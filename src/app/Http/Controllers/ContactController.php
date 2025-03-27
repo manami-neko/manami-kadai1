@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Contact;
 use App\Models\Category;
+use App\Models\Channel;
 use App\Http\Requests\ContactRequest;
 
 
@@ -13,7 +14,8 @@ class ContactController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('index', compact('categories'));
+        $channels = Channel::all();
+        return view('index', compact('categories','channels'));
     }
 
     public function confirm(ContactRequest $request)
@@ -22,6 +24,7 @@ class ContactController extends Controller
                 'last_name',
                 'first_name',
                 'gender',
+                'channel_ids',
                 'email',
                 'tel1',
                 'tel2',
@@ -30,6 +33,7 @@ class ContactController extends Controller
                 'building',
                 'category_id',
                 'detail',
+                'image_file',
             );
 
         if ($contact['gender'] == 1) {
@@ -39,8 +43,11 @@ class ContactController extends Controller
     } elseif ($contact['gender'] == 3) {
         $contact['gender_text'] = 'その他';
     }
+
         $category = Category::find($request->category_id);
-        return view('confirm', compact('contact','category'));
+        $channels = Channel::find($request->channel_ids);
+        $contact['image_file'] = $request->image_file->store('img', 'public');
+        return view('confirm', compact('contact','category','channels'));
     }
 
     public function thanks(Request $request)
@@ -51,12 +58,14 @@ class ContactController extends Controller
                 'last_name',
                 'first_name',
                 'gender',
+                'channel_ids',
                 'email',
                 'tel',
                 'address',
                 'building',
                 'category_id',
                 'detail',
+                'image_file',
             ]);
         Contact::create($contact);
         return view('thanks');
@@ -144,5 +153,26 @@ class ContactController extends Controller
         }
 
         return $query;
+    }
+
+    public function store(Request $request)
+    {
+        $contact = Contact::create($request->only(
+            [
+                'last_name',
+                'first_name',
+                'gender',
+                'channel_ids',
+                'email',
+                'tel',
+                'address',
+                'building',
+                'category_id',
+                'detail',
+                'image_file',
+            ])
+        );
+        $contact->channels()->sync($request->channel_ids);
+        return view('thanks');
     }
 }

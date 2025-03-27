@@ -26,8 +26,13 @@ class Contact extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function channels()
+    {
+        return $this->belongsToMany(Channel::class, 'channel_contact');
+    }
 
 
+    
     // public function scopeContactSearch($query, $category_id)
     // {
     //     if (!empty($category_id)) {
